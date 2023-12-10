@@ -16,8 +16,8 @@ function AddFunction(props) {
   function AddNote() {
     {
       inputValue.trim() !== ""
-        ? props.list.push([inputValue, false])
-        : props.list.push([`Note #${props.count}`, false]);
+        ? props.list.push([inputValue, false, ""])
+        : props.list.push([`Note ${props.count}`, false, ""]);
     }
     setTimeout(() => {
       props.setCount(props.count + 1);
@@ -32,12 +32,12 @@ function AddFunction(props) {
 
   function handleKey(event) {
     {
-      if (event.key === "Enter" ) {
+      if (event.key === "Enter") {
         if (event.target.value === inputValue) {
           AddNote();
         }
         if (event.target.value === "button") {
-          Toggle()
+          Toggle();
         }
       }
     }

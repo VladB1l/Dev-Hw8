@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import {kanit} from './fonts'
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Todo List",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={kanit.className}>
-        <h1>Todo List</h1>
+        <Link href="/"> <h1>Todo List</h1></Link>
         {children}
       </body>
     </html>

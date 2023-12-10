@@ -1,0 +1,15 @@
+.icons span {
+  color: #cdcdcd;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.icons span:first-child :hover,
+.icons span:last-child :hover {
+  color: #6c63ff;
+}
+
+.icons span:nth-child(2):hover {
+  color: #e50000;
+}

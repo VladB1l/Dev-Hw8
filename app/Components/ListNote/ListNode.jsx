@@ -1,5 +1,5 @@
 import styles from "./ListNote.module.css";
-import { Icon } from "@iconify/react";
+import IconSection from "../IconSection/IconSection";
 
 function ListNote(props) {
   function RemoveNote(index) {
@@ -36,16 +36,12 @@ function ListNote(props) {
               />
               <p>{listitem[0]}</p>
             </div>
-            <div className={styles.icons}>
-              <Icon
-                onClick={() => EditNote(index, listitem[0])}
-                icon="octicon:pencil-24"
-              />
-              <Icon
-                onClick={() => RemoveNote(index)}
-                icon="solar:trash-bin-minimalistic-outline"
-              />
-            </div>
+            <IconSection
+              RemoveNote={RemoveNote}
+              EditNote={EditNote}
+              index={index}
+              listitem={listitem}
+            />
           </li>
         ))}
       </ul>
