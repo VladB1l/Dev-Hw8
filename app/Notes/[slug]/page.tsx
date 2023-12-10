@@ -29,7 +29,6 @@ export default function Page({ params }: { params: { slug: string } }) {
       setHeight(`${elem.scrollHeight}px`);
       newList[index][2] = elem.value;
       setList(newList);
-      console.log(newList);
     }
   }
 

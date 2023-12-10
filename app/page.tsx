@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [count, setCount] = useState(() => {
     const countValue = localStorage.getItem("NoteCount");
-    return countValue ? JSON.parse(countValue) : 1;
+    return countValue ? JSON.parse(countValue) : 0;
   });
 
   const [list, setList] = useState(() => {
@@ -20,7 +20,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    localStorage.setItem("NoteCount", JSON.stringify(count - 1));
+    localStorage.setItem("NoteCount", JSON.stringify(count));
     localStorage.setItem("ListInfo", JSON.stringify(list));
   }, [count, list]);
 

@@ -17,7 +17,7 @@ function AddFunction(props) {
     {
       inputValue.trim() !== ""
         ? props.list.push([inputValue, false, ""])
-        : props.list.push([`Note ${props.count}`, false, ""]);
+        : props.list.push([`Note ${props.count + 1}`, false, ""]);
     }
     setTimeout(() => {
       props.setCount(props.count + 1);
