@@ -3,7 +3,6 @@ import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { useEffect, useState, useRef } from "react";
 
-
 export default function Page({ params }: { params: { slug: string } }) {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -12,29 +11,30 @@ export default function Page({ params }: { params: { slug: string } }) {
   const decodedSlug = decodeURIComponent(params.slug);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [list, setList] = useState(() => {
-    try{
+    try {
       const listValue = localStorage.getItem("ListInfo");
       return listValue ? JSON.parse(listValue) : [];
-    }catch(error){}
+    } catch (error) {
+      console.log("The data isn't loaded");
+      return [];
+    }
   });
-
 
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, []);
-
+  }, [list]);
 
   function FuncResize(elem: any) {
-    const updatedList = [...list];
-    updatedList[index][2] = elem.value;
-    setList(updatedList);
-    localStorage.setItem("ListInfo", JSON.stringify(list));
+    if (list[index]) {
+      const updatedList = [...list];
+      updatedList[index][2] = elem.value;
+      setList(updatedList);
+      localStorage.setItem("ListInfo", JSON.stringify(updatedList));
+    }
   }
-
-
 
   return (
     <div className={styles.main}>
@@ -42,7 +42,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       <div className={styles.note_content}>
         <textarea
           ref={textareaRef}
-          value={list[index][2]}
+          value={list[index]?.[2] || ""}
           onChange={(e) => FuncResize(e.target)}
           placeholder="Type something ..."
           spellCheck="false"
