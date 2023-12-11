@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const searchParams = useSearchParams();
@@ -9,38 +9,37 @@ export default function Page({ params }: { params: { slug: string } }) {
   const index = parseInt(id ?? "0", 10);
 
   const decodedSlug = decodeURIComponent(params.slug);
-  const [height, setHeight] = useState("auto");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [list, setList] = useState(() => {
     const listValue = localStorage.getItem("ListInfo");
     return listValue ? JSON.parse(listValue) : [];
   });
-  const newList = [...list];
 
   useEffect(() => {
-    localStorage.setItem("ListInfo", JSON.stringify(newList));
+    localStorage.setItem("ListInfo", JSON.stringify(list));
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
   }, [list]);
 
-  const newHeight = {
-    height: `${height}`,
-  };
 
   function FuncResize(elem: any) {
-    if (id) {
-      setHeight(`${elem.scrollHeight}px`);
-      newList[index][2] = elem.value;
-      setList(newList);
-    }
+    const updatedList = [...list];
+    updatedList[index][2] = elem.value;
+    setList(updatedList);
   }
 
   return (
     <div className={styles.main}>
-      <h2>{decodedSlug}:</h2>
+      <h2>{decodedSlug} :</h2>
       <div className={styles.note_content}>
         <textarea
+          ref={textareaRef}
           value={list[index][2]}
           onChange={(e) => FuncResize(e.target)}
-          style={newHeight}
           placeholder="Type something ..."
+          spellCheck = "false"
         />
       </div>
     </div>

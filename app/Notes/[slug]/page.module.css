@@ -10,12 +10,12 @@
 }
 
 .note_content textarea {
-  padding: 10px;
   outline: none;
+  height: auto;
   border: 0;
-  height: 50px;
   background-color: transparent;
   font-size: 20px;
   width: 100%;
   resize: none;
+  overflow-y: hidden;
 }

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./AddFunction.module.css";
 
-function AddFunction(props) {
+function AddFunction(props: any) {
   const [isOpen, setToggle] = useState(false);
   const [inputValue, setInput] = useState("");
-  const inputref = useRef(0);
-  const buttonref = useRef(0);
+  const inputref = useRef<HTMLInputElement>(null);
+  const buttonref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    {
+    if (inputref.current && buttonref.current) {
       isOpen ? inputref.current.focus() : buttonref.current.focus();
     }
   }, [isOpen]);
@@ -30,7 +30,7 @@ function AddFunction(props) {
     setToggle(!isOpen);
   }
 
-  function handleKey(event) {
+  function handleKey(event:any) {
     {
       if (event.key === "Enter") {
         if (event.target.value === inputValue) {

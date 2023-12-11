@@ -1,14 +1,14 @@
 import styles from "./ListNote.module.css";
 import IconSection from "../IconSection/IconSection";
 
-function ListNote(props) {
-  function RemoveNote(index) {
+function ListNote(props:any) {
+  function RemoveNote(index:number) {
     let newList = [...props.list];
     newList.splice(index, 1);
     props.setList(newList);
   }
 
-  function EditNote(index, text) {
+  function EditNote(index:number, text:string) {
     let name = prompt("Edit your note", `${text}`);
     if (name !== null && name.trim() !== "") {
       let newList = [...props.list];
@@ -17,7 +17,7 @@ function ListNote(props) {
     }
   }
 
-  function handleCheckbox(index) {
+  function handleCheckbox(index:number) {
     let newList = [...props.list];
     newList[index][1] = !newList[index][1];
     props.setList(newList);
@@ -26,7 +26,7 @@ function ListNote(props) {
   return (
     <div>
       <ul className={styles.list}>
-        {props.list.map((listitem, index) => (
+        {props.list.map((listitem:any, index:number) => (
           <li className={styles.listitem} key={index}>
             <div>
               <input

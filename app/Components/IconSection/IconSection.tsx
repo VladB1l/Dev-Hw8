@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import styles from "./IconSection.module.css";
 
-export default function IconSection(props) {
+export default function IconSection(props:any) {
   return (
     <div className={styles.icons}>
       <span>
