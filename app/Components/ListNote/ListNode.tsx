@@ -1,36 +1,35 @@
 import styles from "./ListNote.module.css";
 import IconSection from "../IconSection/IconSection";
 
-function ListNote(props:any) {
-  function RemoveNote(index:number) {
+function ListNote(props: any) {
+  function RemoveNote(index: number) {
     let newList = [...props.list];
     newList.splice(index, 1);
-    props.setList(newList);  
-    localStorage.setItem("ListInfo", JSON.stringify(props.list));
+    props.setList(newList);
+    localStorage.setItem("ListInfo", JSON.stringify(newList));
   }
 
-  function EditNote(index:number, text:string) {
+  function EditNote(index: number, text: string) {
     let name = prompt("Edit your note", `${text}`);
     if (name !== null && name.trim() !== "") {
       let newList = [...props.list];
       newList[index][0] = `${name}`;
       props.setList(newList);
+      localStorage.setItem("ListInfo", JSON.stringify(newList));
     }
-    localStorage.setItem("ListInfo", JSON.stringify(props.list));
   }
 
-  function handleCheckbox(index:number) {
+  function handleCheckbox(index: number) {
     let newList = [...props.list];
     newList[index][1] = !newList[index][1];
     props.setList(newList);
-    localStorage.setItem("ListInfo", JSON.stringify(props.list));
+    localStorage.setItem("ListInfo", JSON.stringify(newList));
   }
 
-  
   return (
     <div>
       <ul className={styles.list}>
-        {props.list.map((listitem:any, index:number) => (
+        {props.list.map((listitem: any, index: number) => (
           <li className={styles.listitem} key={index}>
             <div>
               <input
