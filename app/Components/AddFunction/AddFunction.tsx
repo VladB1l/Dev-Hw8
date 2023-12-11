@@ -23,6 +23,8 @@ function AddFunction(props: any) {
       props.setCount(props.count + 1);
       Toggle();
     }, 0);
+    localStorage.setItem("ListInfo", JSON.stringify(props.list));
+    localStorage.setItem("NoteCount", JSON.stringify(props.count + 1));
   }
 
   function Toggle() {
@@ -30,7 +32,7 @@ function AddFunction(props: any) {
     setToggle(!isOpen);
   }
 
-  function handleKey(event:any) {
+  function handleKey(event: any) {
     {
       if (event.key === "Enter") {
         if (event.target.value === inputValue) {

@@ -18,4 +18,5 @@
   width: 100%;
   resize: none;
   overflow-y: hidden;
+  text-align: justify;
 }

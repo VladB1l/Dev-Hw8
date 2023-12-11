@@ -5,7 +5,8 @@ function ListNote(props:any) {
   function RemoveNote(index:number) {
     let newList = [...props.list];
     newList.splice(index, 1);
-    props.setList(newList);
+    props.setList(newList);  
+    localStorage.setItem("ListInfo", JSON.stringify(props.list));
   }
 
   function EditNote(index:number, text:string) {
@@ -15,14 +16,17 @@ function ListNote(props:any) {
       newList[index][0] = `${name}`;
       props.setList(newList);
     }
+    localStorage.setItem("ListInfo", JSON.stringify(props.list));
   }
 
   function handleCheckbox(index:number) {
     let newList = [...props.list];
     newList[index][1] = !newList[index][1];
     props.setList(newList);
+    localStorage.setItem("ListInfo", JSON.stringify(props.list));
   }
 
+  
   return (
     <div>
       <ul className={styles.list}>
