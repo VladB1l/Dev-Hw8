@@ -1,7 +1,7 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import styles from "./Search.module.css";
-import { useRouter } from "next/navigation";
+import { useRouter} from "next/navigation";
 import { Icon } from "@iconify/react";
 
 export default function Page() {
@@ -16,16 +16,18 @@ export default function Page() {
 
   function CheckArr() {
     const listValue = localStorage.getItem("ListInfo");
-    const list = listValue ? JSON.parse(listValue) : []
+    const list = listValue ? JSON.parse(listValue) : [];
 
     if (inputRef.current) {
       const inputValue = inputRef.current.value;
-      list.map((listitem: any, index: number) => {
-        if (listitem[0] === inputValue) {
-          router.push(`/Notes/${encodeURIComponent(listitem[0])}?id=${index}`);
-        }
-      });
-
+      const index = list.findIndex(
+        (listitem: any) => listitem[0] === inputValue
+      );
+      if (index !== -1) {
+        router.push(`/Notes/${encodeURIComponent(list[index][0])}?id=${index}`);
+      } else {
+        router.push(`/${inputValue}`);
+      }
       inputRef.current.value = "";
     }
   }
